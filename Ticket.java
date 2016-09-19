@@ -1,0 +1,3 @@
+public Ticket extends Product{
+  
+}
