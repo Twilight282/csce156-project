@@ -6,10 +6,10 @@ public class MovieTicket extends Ticket{
 
 
   public MovieTicket(String code, double price, DateTime dateTime,String name,int screen){
+    super(code, price);
     this.dateTime = dateTime;
     this.name = name;
     this.screen = screen;
-    super(code, price);
   }
 
   public DateTime getDateTime(){
