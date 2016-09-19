@@ -1,4 +1,4 @@
-public Student extends Customer{
+public class Student extends Customer{
 
   private String contact;
 
