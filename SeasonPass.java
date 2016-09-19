@@ -1,4 +1,4 @@
-public SeasonPass{
+public SeasonPass extends Ticket{
 
   private DateTime startDate;
   private DateTime endDate;
