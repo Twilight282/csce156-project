@@ -2,8 +2,9 @@ public Refreshment{
 
   private boolean discounted;
 
-  public Refreshment(boolean discounted = False){
+  public Refreshment(String code, double price, boolean discounted){
     this.discounted = discounted;
+    super(code, price);
   }
   
   public void discount(){
