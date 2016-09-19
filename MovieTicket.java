@@ -5,10 +5,11 @@ public MovieTicket extends Ticket{
   private int screen;
 
 
-  public MovieTicket(DateTime dateTime,String name,int screen){
+  public MovieTicket(String code, double price, DateTime dateTime,String name,int screen){
     this.dateTime = dateTime;
     this.name = name;
     this.screen = screen;
+    super(code, price)
   }
 
   public DateTime getDateTime(){
