@@ -1,4 +1,4 @@
-public Refreshment{
+public class Refreshment{
 
   private boolean discounted;
 
