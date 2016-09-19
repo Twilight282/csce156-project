@@ -3,7 +3,7 @@ public Product{
   private double price;
   private String code;
 
-  public Product(double price, String code){
+  public Product(String code, double price){
     this.price = price;
     this.code = code;
   }
