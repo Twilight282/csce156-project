@@ -4,8 +4,8 @@ public class ParkingPass extends Service{
 
 
   public ParkingPass(String code, double price, boolean discounted){
-    this.discounted = discounted;
     super(code, price);
+    this.discounted = discounted;
   }
   
   public void discount(){
