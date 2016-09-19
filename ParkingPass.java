@@ -1,4 +1,4 @@
-public ParkingPass extends Service{
+public class ParkingPass extends Service{
 
   private boolean discounted;
 
