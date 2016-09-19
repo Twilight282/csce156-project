@@ -1,4 +1,4 @@
-public MovieTicket extends Ticket{
+public class MovieTicket extends Ticket{
 
   private DateTime dateTime;
   private String name;
