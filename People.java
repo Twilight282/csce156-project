@@ -1,4 +1,4 @@
-public People{
+public class People{
 
   private String name;
   private Address address;
