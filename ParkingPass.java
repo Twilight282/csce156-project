@@ -3,8 +3,9 @@ public ParkingPass extends Service{
   private boolean discounted;
 
 
-  public ParkingPass(boolean discounted){
+  public ParkingPass(String code, double price, boolean discounted){
     this.discounted = discounted;
+    super(code, price);
   }
   
   public void discount(){
