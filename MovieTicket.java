@@ -9,7 +9,7 @@ public MovieTicket extends Ticket{
     this.dateTime = dateTime;
     this.name = name;
     this.screen = screen;
-    super(code, price)
+    super(code, price);
   }
 
   public DateTime getDateTime(){
