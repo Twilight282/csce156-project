@@ -4,10 +4,10 @@ public People{
   private Address address;
   private String code;
 
-  public People(String name,Address address,String code){
+  public People(String code, String name, Address address){
     this.name = name;
     this.address = address;
-    this.code;
+    this.code = code;
   }
 
   public String getName(){
