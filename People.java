@@ -1,18 +1,13 @@
 public class People{
 
-  private String name;
-  private Address address;
-  private String code;
+  protected Address address;
+  protected String code;
 
-  public People(String code, String name, Address address){
-    this.name = name;
+  public People(String code, Address address){
     this.address = address;
     this.code = code;
   }
 
-  public String getName(){
-    return this.name;
-  }
 
   public Address getAddress(){
     return this.address;
