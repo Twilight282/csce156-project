@@ -2,14 +2,16 @@ public class MovieTicket extends Ticket{
 
   private DateTime dateTime;
   private String name;
-  private int screen;
+  private String screen;
+  private Address address;
 
 
-  public MovieTicket(String code, double price, DateTime dateTime,String name,int screen){
+  public MovieTicket(String code, double price, DateTime dateTime, String name, String screen, Address address){
     super(code, price);
     this.dateTime = dateTime;
     this.name = name;
     this.screen = screen;
+    this.address = address;
   }
 
   public DateTime getDateTime(){
@@ -20,8 +22,12 @@ public class MovieTicket extends Ticket{
     return this.name;
   }
 
-  public int getScreen(){
+  public String getScreen(){
     return this.screen;
+  }
+  
+  public Address getAddress(){
+    return this.address;
   }
 
 }
