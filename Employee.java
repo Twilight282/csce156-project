@@ -1,13 +1,13 @@
 public class Employee extends People{
   
-  private String email;
+  private String[] emails;
   
-  public Employee(String code, String name, Address address, String email){
+  public Employee(String code, String name, Address address, String[] emails){
     super(code, name, address);
-    this.email = email;
+    this.emails = emails;
   }
   
-  public String getEmail(){
-    return this.email;
+  public String[] getEmails(){
+    return this.emails;
   }
 }
