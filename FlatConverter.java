@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class flatConverter {
+public class FlatConverter {
 	public ArrayList<Employee> loadEmployees(){
 		Scanner reads;
 		try{
