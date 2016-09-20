@@ -1,7 +1,7 @@
 public class Product{
 
-  private double price;
-  private String code;
+  protected double price;
+  protected String code;
 
   public Product(String code, double price){
     this.price = price;
