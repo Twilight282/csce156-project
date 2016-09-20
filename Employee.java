@@ -1,4 +1,4 @@
-public class Employee{
+public class Employee extends People{
   
   private String[] emails;
   private String name;
