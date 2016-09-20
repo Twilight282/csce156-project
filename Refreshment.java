@@ -1,18 +1,24 @@
 public class Refreshment{
 
   private boolean discounted;
+  private String name;
 
-  public Refreshment(String code, double price, boolean discounted){
+  public Refreshment(String code, double price, String name){
     super(code, price);
-    this.discounted = discounted;
+    this.discounted = false;
+    this.name = name;
   }
   
   public void discount(){
-    this.discounted = True;
+    this.discounted = true;
   }
 
   public boolean getDiscounted(){
     return this.discounted;
+  }
+  
+  public boolean getName(){
+    return this.name;
   }
 
 }
