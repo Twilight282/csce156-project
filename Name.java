@@ -4,7 +4,7 @@ public class Name{
   private String last;
   
   public Name(String first, String last){
-    this.first = frist;
+    this.first = first;
     this.last = last;
   }
 
