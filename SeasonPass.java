@@ -2,7 +2,7 @@ public class SeasonPass extends Ticket{
 
   private String startDate;
   private String endDate;
-  private DateTime effectiveDate;
+  private String effectiveDate;
   private String name;
 
 
@@ -14,19 +14,19 @@ public class SeasonPass extends Ticket{
     this.name = name;
   }
   
-  public void setEffectiveDate(DateTime date){
+  public void setEffectiveDate(String date){
     this.effectiveDate = date;
   }
 
-  public DateTime getStartDate(){
+  public String getStartDate(){
     return this.startDate;
   }
 
-  public DateTime getEndDate(){
+  public String getEndDate(){
     return this.endDate;
   }
 
-  public DateTime getEffectiveDate(){
+  public String getEffectiveDate(){
     return this.effectiveDate;
   }
 
