@@ -6,7 +6,7 @@ import com.thoughtworks.xstream.XStream;
 
 
 public class Writer {
-	public void employeeWriter(ArrayList<Employee> employee) {
+	public static void employeeWriter(ArrayList<Employee> employee) {
 		XStream xstream = new XStream();
 	
 		File xmlOut = new File("data/People.xml");
@@ -27,7 +27,7 @@ public class Writer {
 		}
 	}
 	
-	public void productWriter(ArrayList<Product> product) {
+	public static void productWriter(ArrayList<Product> product) {
 		XStream xstream = new XStream();
 	
 		File xmlOut = new File("data/Products.xml");
@@ -48,7 +48,7 @@ public class Writer {
 		}
 	}
 	
-	public void customerWriter(ArrayList<Customer> customer) {
+	public static void customerWriter(ArrayList<Customer> customer) {
 		XStream xstream = new XStream();
 	
 		File xmlOut = new File("data/Customer.xml");

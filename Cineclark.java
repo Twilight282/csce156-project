@@ -7,5 +7,9 @@ public class Cineclark {
 		ArrayList<Customer> customers = fc.loadCustomers();
 		ArrayList<Employee> employees = fc.loadEmployees();
 		//and over to you
+		
+		Writer.employeeWriter(employees);
+		Writer.customerWriter(customers);
+		Writer.productWriter(products);
 	}
 }
