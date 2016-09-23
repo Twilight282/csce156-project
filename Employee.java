@@ -1,9 +1,9 @@
 public class Employee extends People{
   
   private String[] emails;
-  private String name;
+  private Name name;
   
-  public Employee(String code, String name, Address address, String[] emails){
+  public Employee(String code, Name name, Address address, String[] emails){
     super(code, address);
     this.emails = emails;
     this.name = name;
@@ -13,7 +13,7 @@ public class Employee extends People{
     return this.emails;
   }
   
-  public String getName(){
+  public Name getName(){
 	  return this.name;
   }
 }
