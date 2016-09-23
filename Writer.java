@@ -23,8 +23,10 @@ public class Writer {
 		xstream.alias("person", Employee.class);
 		for (Employee a : employee) {
 			String personOut = xstream.toXML(a);
-			xmlPrinter.write(personOut);
+			xmlPrinter.write(personOut + "\n");
 		}
+		
+		xmlPrinter.close();
 	}
 	
 	public static void productWriter(ArrayList<Product> product) {
@@ -44,8 +46,10 @@ public class Writer {
 		xstream.alias("product", Product.class);
 		for (Product a : product) {
 			String productOut = xstream.toXML(a);
-			xmlPrinter.write(productOut);
+			xmlPrinter.write(productOut + "\n");
 		}
+		
+		xmlPrinter.close();
 	}
 	
 	public static void customerWriter(ArrayList<Customer> customer) {
@@ -65,7 +69,9 @@ public class Writer {
 		xstream.alias("customer", Customer.class);
 		for (Customer a : customer) {
 			String customerOut = xstream.toXML(a);
-			xmlPrinter.write(customerOut);
+			xmlPrinter.write(customerOut + "\n");
 		}
+		
+		xmlPrinter.close();
 	}
 }
