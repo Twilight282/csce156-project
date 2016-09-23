@@ -8,13 +8,13 @@ public class FlatConverter {
 	public ArrayList<Employee> loadEmployees(){
 		Scanner reads = null;
 		try{
-			reads = new Scanner(new FileReader("data/persons.dat"));
+			reads = new Scanner(new FileReader("persons.dat"));
 		}
 		catch (FileNotFoundException e){
 			System.out.println("Well this is a disaster:  ");
 			e.printStackTrace();
 		}
-		int n = reads.nextInt();
+		int n = Integer.parseInt(reads.nextLine());
 		
 		ArrayList<Employee> emps = new ArrayList<Employee>();
 		
@@ -37,13 +37,13 @@ public class FlatConverter {
 	public ArrayList<Customer> loadCustomers(){
 		Scanner reads = null;
 		try{
-			reads = new Scanner(new FileReader("data/customers.dat"));
+			reads = new Scanner(new FileReader("customers.dat"));
 		}
 		catch (FileNotFoundException e){
 			System.out.println("Well this is a disaster:  ");
 			e.printStackTrace();
 		}
-		int n = reads.nextInt();
+		int n = Integer.parseInt(reads.nextLine());
 		
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		
@@ -67,18 +67,19 @@ public class FlatConverter {
 	public ArrayList<Product> loadProducts(){
 		Scanner reads = null;
 		try{
-			reads = new Scanner(new FileReader("data/customers.dat"));
+			reads = new Scanner(new FileReader("products.dat"));
 		}
 		catch (FileNotFoundException e){
 			System.out.println("Well this is a disaster:  ");
 			e.printStackTrace();
 		}
-		int n = reads.nextInt();
+		int n = Integer.parseInt(reads.nextLine());
 		
 		ArrayList<Product> products = new ArrayList<Product>();
 		
 		while (reads.hasNextLine()){
 			String line = reads.nextLine();
+			System.out.println(line);
 			String[] parts = line.split(";");
 			String code = parts[0];
 			Product p = null;
