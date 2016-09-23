@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class FlatConverter {
 	public ArrayList<Employee> loadEmployees(){
-		Scanner reads;
+		Scanner reads = null;
 		try{
 			reads = new Scanner(new FileReader("data/persons.dat"));
 		}
@@ -35,7 +35,7 @@ public class FlatConverter {
 	}
 	
 	public ArrayList<Customer> loadCustomers(){
-		Scanner reads;
+		Scanner reads = null;
 		try{
 			reads = new Scanner(new FileReader("data/customers.dat"));
 		}
@@ -52,10 +52,9 @@ public class FlatConverter {
 			String[] parts = line.split(";");
 			String code = parts[0];
 			String contact = parts[2];
-			Name name = new Name(parts[3]);
+			String name = parts[3];
 			String[] adParts = parts[4].split(",");
 			Address add = new Address(adParts[0], adParts[1], adParts[2], Integer.parseInt(adParts[3]), adParts[4]);
-			String[] emails = parts[3].split(",");
 			Customer c;
 			if (parts[1].equals("G")) c = new General(code, name, add, contact);
 			else c = new Student(code, name, add, contact);
