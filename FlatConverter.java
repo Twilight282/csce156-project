@@ -65,7 +65,7 @@ public class FlatConverter {
 	}
 	
 	public ArrayList<Product> getProducts(){
-		Scanner reads;
+		Scanner reads = null;
 		try{
 			reads = new Scanner(new FileReader("data/customers.dat"));
 		}
@@ -81,7 +81,7 @@ public class FlatConverter {
 			String line = reads.nextLine();
 			String[] parts = line.split(";");
 			String code = parts[0];
-			Product p;
+			Product p = null;
 			if (parts[1].equals("M")){
 				String dateTime = parts[2];
 				String name = parts[3];
