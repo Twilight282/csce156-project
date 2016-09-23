@@ -12,4 +12,8 @@ public class Employee extends People{
   public String[] getEmails(){
     return this.emails;
   }
+  
+  public Name getName(){
+	  return this.name;
+  }
 }
