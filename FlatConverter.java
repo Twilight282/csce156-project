@@ -64,7 +64,7 @@ public class FlatConverter {
 		return customers;
 	}
 	
-	public ArrayList<Product> getProducts(){
+	public ArrayList<Product> loadProducts(){
 		Scanner reads = null;
 		try{
 			reads = new Scanner(new FileReader("data/customers.dat"));
