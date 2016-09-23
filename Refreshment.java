@@ -17,7 +17,7 @@ public class Refreshment extends Service{
     return this.discounted;
   }
   
-  public boolean getName(){
+  public String getName(){
     return this.name;
   }
 
