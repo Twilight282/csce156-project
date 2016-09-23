@@ -20,6 +20,7 @@ public class FlatConverter {
 		
 		while (reads.hasNextLine()){
 			String line = reads.nextLine();
+			System.out.println(line);
 			String[] parts = line.split(";");
 			String code = parts[0];
 			String[] nameParts = parts[1].split(",");
@@ -49,6 +50,7 @@ public class FlatConverter {
 		
 		while (reads.hasNextLine()){
 			String line = reads.nextLine();
+			System.out.println(line);
 			String[] parts = line.split(";");
 			String code = parts[0];
 			String contact = parts[2];
