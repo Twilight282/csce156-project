@@ -8,7 +8,7 @@ public class FlatConverter {
 	public ArrayList<Employee> loadEmployees(){
 		Scanner reads = null;
 		try{
-			reads = new Scanner(new FileReader("persons.dat"));
+			reads = new Scanner(new FileReader("data/persons.dat"));
 		}
 		catch (FileNotFoundException e){
 			System.out.println("Well this is a disaster:  ");
@@ -38,7 +38,7 @@ public class FlatConverter {
 	public ArrayList<Customer> loadCustomers(){
 		Scanner reads = null;
 		try{
-			reads = new Scanner(new FileReader("customers.dat"));
+			reads = new Scanner(new FileReader("data/customers.dat"));
 		}
 		catch (FileNotFoundException e){
 			System.out.println("Well this is a disaster:  ");
@@ -69,7 +69,7 @@ public class FlatConverter {
 	public ArrayList<Product> loadProducts(){
 		Scanner reads = null;
 		try{
-			reads = new Scanner(new FileReader("products.dat"));
+			reads = new Scanner(new FileReader("data/products.dat"));
 		}
 		catch (FileNotFoundException e){
 			System.out.println("Well this is a disaster:  ");
