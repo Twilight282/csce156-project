@@ -1,4 +1,4 @@
-public class Refreshment{
+public class Refreshment extends Service{
 
   private boolean discounted;
   private String name;
