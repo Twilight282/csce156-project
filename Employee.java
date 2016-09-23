@@ -13,7 +13,7 @@ public class Employee extends People{
     return this.emails;
   }
   
-  public Name getName(){
+  public String getName(){
 	  return this.name;
   }
 }
