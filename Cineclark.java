@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Cineclark {
 	public static void main(String[] args){
 		FlatConverter fc = new FlatConverter();
