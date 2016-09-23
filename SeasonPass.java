@@ -29,5 +29,9 @@ public class SeasonPass extends Ticket{
   public String getEffectiveDate(){
     return this.effectiveDate;
   }
+  
+  public String getName(){
+    return this.name;
+  }
 
 }
