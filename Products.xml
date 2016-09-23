@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Refreshment>
+  <price>22.13</price>
+  <code>a3f2</code>
+  <discounted>false</discounted>
+  <name>Apple Pie</name>
+</Refreshment>
+<MovieTicket>
+  <price>4.59</price>
+  <code>sf9w</code>
+  <dateTime>2009-04-13 6:12</dateTime>
+  <name>The Beginning</name>
+  <screen>4X</screen>
+  <address>
+    <street>15485 Fir Dr</street>
+    <city>Maple Valley</city>
+    <state>WA</state>
+    <zip>12842</zip>
+    <country>USA</country>
+  </address>
+</MovieTicket>
+<ParkingPass>
+  <price>12.0</price>
+  <code>jfd8</code>
+  <discounted>false</discounted>
+</ParkingPass>
+<MovieTicket>
+  <price>10.25</price>
+  <code>13r8</code>
+  <dateTime>2012-12-06 2:23</dateTime>
+  <name>Con Air</name>
+  <screen>13</screen>
+  <address>
+    <street>18353 Lincoln Drive</street>
+    <city>Omaha</city>
+    <state>NE</state>
+    <zip>15248</zip>
+    <country>USA</country>
+  </address>
+</MovieTicket>
+<SeasonPass>
+  <price>111.11</price>
+  <code>1r94</code>
+  <startDate>2011-11-11</startDate>
+  <endDate>2012-11-11</endDate>
+  <effectiveDate>2011-11-11</effectiveDate>
+  <name>November 11 Sale</name>
+</SeasonPass>
+<ParkingPass>
+  <price>42.0</price>
+  <code>1vhw</code>
+  <discounted>false</discounted>
+</ParkingPass>
+<Refreshment>
+  <price>420.0</price>
+  <code>rf07</code>
+  <discounted>false</discounted>
+  <name>Betty Crocker Cake</name>
+</Refreshment>
+<MovieTicket>
+  <price>2.24</price>
+  <code>vufw</code>
+  <dateTime>1998-07-27 3:05</dateTime>
+  <name>An Evil Arises</name>
+  <screen>2T</screen>
+  <address>
+    <street>58391 N 14th Circle</street>
+    <city>Omaha</city>
+    <state>NE</state>
+    <zip>68116</zip>
+    <country>USA</country>
+  </address>
+</MovieTicket>
+<ParkingPass>
+  <price>23.19</price>
+  <code>fjie</code>
+  <discounted>false</discounted>
+</ParkingPass>

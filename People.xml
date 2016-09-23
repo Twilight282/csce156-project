@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<person>
+  <address>
+    <street>43838 N Potato Drive</street>
+    <city>Lyons</city>
+    <state>CO</state>
+    <zip>39492</zip>
+    <country>USA</country>
+  </address>
+  <code>fji2</code>
+  <emails>
+    <string>ghostyTherapy@gmail.com</string>
+  </emails>
+  <name>
+    <first> John</first>
+    <last>Lalonde</last>
+  </name>
+</person>
+<person>
+  <address>
+    <street>59381 West Summer Ave</street>
+    <city>Cans</city>
+    <state>NJ</state>
+    <zip>49120</zip>
+    <country>USA</country>
+  </address>
+  <code>249s</code>
+  <emails>
+    <string>ttimaeus@echidna.com</string>
+  </emails>
+  <name>
+    <first> Rose</first>
+    <last>Strider</last>
+  </name>
+</person>
+<person>
+  <address>
+    <street>88612 Spider St</street>
+    <city>Montreal</city>
+    <state>QB</state>
+    <zip>88488</zip>
+    <country>CAN</country>
+  </address>
+  <code>sy8s</code>
+  <emails>
+    <string>dSerks@findingSofia.org</string>
+  </emails>
+  <name>
+    <first> Dirk</first>
+    <last>Serket</last>
+  </name>
+</person>
+<person>
+  <address>
+    <street>24825 Elements Road</street>
+    <city>Norfolk</city>
+    <state>NE</state>
+    <zip>24853</zip>
+    <country>USA</country>
+  </address>
+  <code>23k1</code>
+  <emails>
+    <string>lightguard@xkcd.com</string>
+  </emails>
+  <name>
+    <first> Vriska</first>
+    <last>Thackeray</last>
+  </name>
+</person>
+<person>
+  <address>
+    <street>97807 Ciro St</street>
+    <city>New York</city>
+    <state>NY</state>
+    <zip>11132</zip>
+    <country>USA</country>
+  </address>
+  <code>fje3</code>
+  <emails>
+    <string>seerofvoid@nyx.net</string>
+  </emails>
+  <name>
+    <first> Llewellyn</first>
+    <last>Marcheti</last>
+  </name>
+</person>
+<person>
+  <address>
+    <street>41313 Golden St</street>
+    <city>Chicago</city>
+    <state>IL</state>
+    <zip>39421</zip>
+    <country>USA</country>
+  </address>
+  <code>dr3g</code>
+  <emails>
+    <string>dpyrope@hephaestus.gov</string>
+  </emails>
+  <name>
+    <first> Dave</first>
+    <last>Pyrope</last>
+  </name>
+</person>
+<person>
+  <address>
+    <street>10231 Charge St</street>
+    <city>Ottawa</city>
+    <state>ON</state>
+    <zip>39520</zip>
+    <country>CAN</country>
+  </address>
+  <code>t0ck</code>
+  <emails>
+    <string>teamcharge@alternia.com</string>
+  </emails>
+  <name>
+    <first> Aradia</first>
+    <last>Nitram</last>
+  </name>
+</person>
+<person>
+  <address>
+    <street>49021 Black St</street>
+    <city>Chicago</city>
+    <state>IL</state>
+    <zip>39421</zip>
+    <country>USA</country>
+  </address>
+  <code>sbaj</code>
+  <emails>
+    <string>sweetbro@mspaintadventures.com</string>
+  </emails>
+  <name>
+    <first> Jeff</first>
+    <last>Jones</last>
+  </name>
+</person>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<General>
+  <address>
+    <street>249 Querty St</street>
+    <city>Lincoln</city>
+    <state>NE</state>
+    <zip>49324</zip>
+    <country>USA</country>
+  </address>
+  <code>C001</code>
+  <name>Sam&apos;s Club</name>
+  <contact>t0ck</contact>
+</General>
+<Student>
+  <address>
+    <street>685 Krita St</street>
+    <city>Blue</city>
+    <state>MS</state>
+    <zip>24921</zip>
+    <country>USA</country>
+  </address>
+  <code>C002</code>
+  <name>Inquest Court</name>
+  <contact>fj12</contact>
+</Student>
+<Student>
+  <address>
+    <street>249 Beforus Ave</street>
+    <city>Tater</city>
+    <state>ID</state>
+    <zip>39021</zip>
+    <country>USA</country>
+  </address>
+  <code>C003</code>
+  <name>Dancestors</name>
+  <contact>sbaj</contact>
+</Student>
+<General>
+  <address>
+    <street>492 Caledon Drive</street>
+    <city>Astorea</city>
+    <state>AK</state>
+    <zip>1394</zip>
+    <country>USA</country>
+  </address>
+  <code>C004</code>
+  <name>Nightmare Squad</name>
+  <contact>fje3</contact>
+</General>
+<Student>
+  <address>
+    <street>413 Broadway St</street>
+    <city>New York</city>
+    <state>NY</state>
+    <zip>11612</zip>
+    <country>USA</country>
+  </address>
+  <code>C005</code>
+  <name>Midnight Crew</name>
+  <contact>23k1</contact>
+</Student>
+<Student>
+  <address>
+    <street>1025 Lost Pkwy</street>
+    <city>Lincoln</city>
+    <state>IN</state>
+    <zip>49321</zip>
+    <country>USA</country>
+  </address>
+  <code>C006</code>
+  <name>The Felt</name>
+  <contact>sy8s</contact>
+</Student>
