@@ -4,12 +4,12 @@ public class Invoice{
   
   private String code;
   private Customer buyer;
-  private Employee seller;
+  private Person seller;
   private ArrayList<Product> cart;
   
   //our class for all invoices for products
   
-  public Invoice(String code, Customer buyer, Employee seller, ArrayList<Product> cart){
+  public Invoice(String code, Customer buyer, Person seller, String date, ArrayList<Product> cart){
     this.code = code;
     this.buyer = buyer;
     this.seller = seller;
@@ -24,7 +24,7 @@ public class Invoice{
     return this.buyer;
   }
   
-  public Employee getSeller(){
+  public Person getSeller(){
     return this.seller;
   }
   

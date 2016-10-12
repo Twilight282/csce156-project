@@ -15,6 +15,14 @@ public class SeasonPass extends Ticket{
     this.name = name;
   }
   
+  public SeasonPass(SeasonPass s){
+	  super(s.getCode(), s.price);
+	  this.startDate = s.startDate;
+	  this.endDate = s.endDate;
+	  this.effectiveDate = s.effectiveDate;
+	  this.name = s.name;
+  }
+  
   public void setEffectiveDate(String date){
     this.effectiveDate = date;
   }

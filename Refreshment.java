@@ -11,6 +11,12 @@ public class Refreshment extends Service{
     this.name = name;
   }
   
+  public Refreshment(Refreshment r){
+	super(r.getCode(), r.price);
+	this.discounted = false;
+	this.name = r.getName();
+  }
+  
   public void discount(){
     this.discounted = true;
   }

@@ -14,6 +14,14 @@ public class MovieTicket extends Ticket{
     this.screen = screen;
     this.address = address;
   }
+  
+  public MovieTicket(MovieTicket m){
+	    super(m.code, m.price);
+	    this.dateTime = m.dateTime;
+	    this.name = m.name;
+	    this.screen = m.screen;
+	    this.address = m.address;
+  }
 
   public String getDateTime(){
     return this.dateTime;
