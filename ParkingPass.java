@@ -2,7 +2,8 @@ public class ParkingPass extends Service{
 
   private boolean discounted;
 
-
+  //parking passes for our services
+  
   public ParkingPass(String code, double price){
     super(code, price);
     this.discounted = false;

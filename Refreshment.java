@@ -3,6 +3,8 @@ public class Refreshment extends Service{
   private boolean discounted;
   private String name;
 
+  //our refreshment class.
+  
   public Refreshment(String code, double price, String name){
     super(code, price);
     this.discounted = false;

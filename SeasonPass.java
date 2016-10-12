@@ -5,6 +5,7 @@ public class SeasonPass extends Ticket{
   private String effectiveDate;
   private String name;
 
+  //our season pass class.
 
   public SeasonPass(String code, double price, String startDate, String endDate, String name){
     super(code, price);

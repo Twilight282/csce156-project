@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.thoughtworks.xstream.XStream;
 
 
+//our xml writer class. this writes out each List to its own xml file.
+
 public class Writer {
 	public static void employeeWriter(ArrayList<Employee> employee) {
 		XStream xstream = new XStream();

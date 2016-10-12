@@ -7,6 +7,8 @@ public class Invoice{
   private Employee seller;
   private ArrayList<Product> cart;
   
+  //our class for all invoices for products
+  
   public Invoice(String code, Customer buyer, Employee seller, ArrayList<Product> cart){
     this.code = code;
     this.buyer = buyer;

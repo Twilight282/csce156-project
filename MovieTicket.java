@@ -5,6 +5,7 @@ public class MovieTicket extends Ticket{
   private String screen;
   private Address address;
 
+  //our movie ticket class. creates movie tickets
 
   public MovieTicket(String code, double price, String dateTime, String name, String screen, Address address){
     super(code, price);

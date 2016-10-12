@@ -1,6 +1,8 @@
 public class Customer extends People{
 
   protected String name;
+  
+  //our customer class. Creates customers
 
   public Customer(String code, String name, Address address){
     super(code, address);
