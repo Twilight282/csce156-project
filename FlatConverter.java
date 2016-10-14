@@ -8,7 +8,7 @@ import java.util.Scanner;
 //on field
 
 public class FlatConverter {
-	public ArrayList<Employee> loadEmployees(){
+	public ArrayList<Person> loadPersons(){
 		Scanner reads = null;
 		try{
 			reads = new Scanner(new File("data/Persons.dat"));
@@ -19,7 +19,7 @@ public class FlatConverter {
 		}
 		int n = Integer.parseInt(reads.nextLine().trim());
 		
-		ArrayList<Employee> emps = new ArrayList<Employee>();
+		ArrayList<Person> emps = new ArrayList<Person>();
 		
 		while (reads.hasNextLine()){
 			String line = reads.nextLine();
@@ -32,7 +32,7 @@ public class FlatConverter {
 			String[] emails = {};
 			if (parts.length > 3) emails = parts[3].split(",");
 			
-			Employee emp = new Employee(code, name, add, emails);
+			Person emp = new Person(code, name, add, emails);
 			emps.add(emp);
 		}
 		reads.close();

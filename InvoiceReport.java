@@ -16,8 +16,10 @@ public class InvoiceReport {
 		customers = fc.loadCustomers(); //creates Customer list
 		persons = fc.loadPersons(); //creates Employee list
 		ArrayList<Invoice> invoices = loadInvoices();
+		Writer.invoiceWriter(invoices);
 		
 	}
+
 	public static ArrayList<Invoice> loadInvoices(){
 		Scanner reads = null;
 		try{
@@ -36,25 +38,36 @@ public class InvoiceReport {
 			String[] parts = line.split(";");
 			String code = parts[0].trim();
 			String buyerCode = parts[1].trim();
+
 			Customer buyer = null;
+			String contactCode = null;
+			Person contact = null;
 			for (Customer i : customers){
-				if (i.getCode() == buyerCode){
+				if (i.getCode().equals(buyerCode)){
 					buyer = i;
+					contactCode = i.getContact();
 				}
 			}
+
 			Person seller = null;
 			String sellerCode = parts[2].trim();
+
 			for (Person i : persons){
-				if (i.getCode() == sellerCode){
+				if (i.getCode().equals(sellerCode)){
 					seller = i;
+				}
+				if (i.getCode().equals(contactCode)){
+					contact = i;
 				}
 			}
 			String date = parts[3];
+		
+			
 			ArrayList<Product> cart = new ArrayList<Product>();
 			for (String i : parts[4].split(",")){
 				String[] itemParts = i.split(":");
 				for (Product j : products){
-					if (itemParts[0] == j.getCode()){
+					if (itemParts[0].equals(j.getCode())){
 						if (j instanceof ParkingPass){
 							ParkingPass p = new ParkingPass((ParkingPass)(j));
 							if (itemParts.length == 3) p.discount();
@@ -77,8 +90,8 @@ public class InvoiceReport {
 				}
 			}
 			
-			
-			Invoice inv = new Invoice(code, buyer, seller, date, cart);
+
+			Invoice inv = new Invoice(code, buyer, seller, date, cart, contact, buyerCode);
 			invs.add(inv);
 		}
 		reads.close();

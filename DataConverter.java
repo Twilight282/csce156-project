@@ -5,10 +5,10 @@ public class DataConverter {
 		FlatConverter fc = new FlatConverter();        //creates converter
 		ArrayList<Product> products = fc.loadProducts();   //creates Product list
 		ArrayList<Customer> customers = fc.loadCustomers(); //creates Customer list
-		ArrayList<Employee> employees = fc.loadEmployees(); //creates Employee list
+		ArrayList<Person> persons = fc.loadPersons(); //creates Employee list
 		//and over to you
 		
-		Writer.employeeWriter(employees);  //writes xml file
+		Writer.personWriter(persons);  //writes xml file
 		Writer.customerWriter(customers);  //writes xml file
 		Writer.productWriter(products);    //writes xml
 	}

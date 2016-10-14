@@ -5,7 +5,7 @@ public class Student extends Customer{
   //our student class, under customer.
   
   public Student(String code, String name, Address address, String contact){
-    super(code, name, address);
+    super(code, name, address, contact);
     this.contact = contact;
   }
 
