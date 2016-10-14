@@ -1,7 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import com.thoughtworks.xstream.XStream;
 
 
@@ -77,9 +83,11 @@ public class Writer {
 		xmlPrinter.close();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void invoiceWriter(ArrayList<Invoice> invoice){
 		double subtotal, tax, total, fees = 0.0;
 		double finalsub, finaltax, finaltotal = 0.0;
+		double totalsub = 0, totaltax = 0, totaltotal = 0, totaldiscount = 0.0, totalsum = 0.0;
 		double discount = 0.0;
 		double sum = 0.0;
 		String type;
@@ -87,7 +95,7 @@ public class Writer {
 		System.out.println("========================");
 		System.out.println("Executive Summary Report");
 		System.out.println("========================");
-		System.out.printf("%s %s %s %s %s %s %s %s\n", "Invoice", "Customer", "Salesperon", "Subtotal", "Fees", "Taxes", "Discount", "Total");
+		System.out.printf("%-15s %-30s %-20s %11s %11s %11s %11s %11s\n", "Invoice", "Customer", "Salesperon", "Subtotal", "Fees", "Taxes", "Discount", "Total");
 		for (Invoice inv : invoice) {
 			String code = inv.getCode();
 			Customer buyer = inv.getBuyer();
@@ -105,7 +113,7 @@ public class Writer {
 			
 			for (Product prods : cart) {
 				if (prods instanceof ParkingPass) {
-					subtotal = prods.getPrice();
+					subtotal = prods.getPrice()*prods.getNum();
 					tax = subtotal * 0.04;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -114,7 +122,7 @@ public class Writer {
 					sum += total;
 				}
 				if (prods instanceof MovieTicket) {
-					subtotal = prods.getPrice();
+					subtotal = prods.getPrice()*prods.getNum();
 					tax = subtotal * 0.06;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -123,7 +131,7 @@ public class Writer {
 					sum += total;
 				}
 				if (prods instanceof SeasonPass) {
-					subtotal = prods.getPrice();
+					subtotal = prods.getPrice()*prods.getNum();
 					tax = subtotal * 0.06;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -132,7 +140,7 @@ public class Writer {
 					sum += total;
 				}
 				if (prods instanceof Refreshment) {
-					subtotal = prods.getPrice();
+					subtotal = prods.getPrice()*prods.getNum();
 					tax = subtotal * 0.04;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -149,10 +157,20 @@ public class Writer {
 				fees = 6.75;
 				sum = sum + 6.75 - discount;
 			}
-			else
+			else {
 				type = "[General]";
-			System.out.printf("%s %s %s %s, %s  $%.2f $%.2f $%.2f $-%.2f $%.2f\n", code, buyer.getName(), type, seller.getName().getLast(), seller.getName().getFirst(), finalsub, fees, finaltax, discount, sum);
+				fees = 0.0;
+			}
+			System.out.printf("%-15s %-30s %-20s $%10.2f $%10.2f $%10.2f $%10.2f $%10.2f\n", code, buyer.getName() + type, seller.getName().getLast() + ", " + seller.getName().getFirst(), finalsub, fees, finaltax, -discount, sum);
+			totalsub += finalsub;
+			totaltax += finaltax;
+			totaltotal += finaltotal;
+			totaldiscount += discount;
+			totalsum += sum;
 		}
+		System.out.println("===========================================================================================================================================================================");
+		System.out.printf("%-67s $%10.2f $%10.2f $%10.2f $%10.2f $%10.2f\n", "TOTAL", totalsub, totaltax, totaltotal, totaldiscount, totalsum);
+		System.out.println();
 		
 		for (Invoice inv : invoice) {
 			subtotal = 0.0;
@@ -185,62 +203,89 @@ public class Writer {
 			System.out.println("  " + buyer.getAddress().getStreet());
 			System.out.println("  " + buyer.getAddress().getCity()+", "+buyer.getAddress().getState()+" "+buyer.getAddress().getZip()+" "+buyer.getAddress().getCountry());
 			System.out.println("=================================");
-			System.out.printf("%-7s %-60s %-20s %-15s %s%n", "Code", "Item", "Subtotal", "Tax", "Total");
+			System.out.printf("%-7s %-58s %10s %11s %11s%n", "Code", "Item", "Subtotal", "Tax", "Total");
 			for (Product prods : cart) {
 					if (prods instanceof ParkingPass) {
-						subtotal = prods.getPrice();
+						subtotal = prods.getPrice()*prods.getNum();
 						tax = subtotal * 0.04;
 						total = subtotal + tax;
 						finaltax += tax;
 						finalsub += subtotal;
 						finaltotal += total;
 						sum += total;
-						System.out.printf("%-7s Parking Pass %40s%.2f  %s%.2f %s%.2f%n", prods.getCode(), "$", subtotal, "$", tax, "$",  total);
+						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Parking Pass (" + prods.getNum() +" units @ $"+ prods.getPrice()+"/unit)", subtotal, tax, total);
 					}
 					if (prods instanceof MovieTicket) {
-						subtotal = prods.getPrice();
+						String date = ((MovieTicket) prods).getDateTime();
+						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+						
+						Date newDate = null;
+						
+				        try {
+				            newDate = formatter.parse(date);
+				        } catch (ParseException e) {
+				            e.printStackTrace();
+				        }
+						
+				        Calendar calendar = Calendar.getInstance();
+				        calendar.setTime(newDate);
+				        
+				        if (newDate.getDay() == 2 || newDate.getDay() == 4)
+				        	subtotal = (prods.getPrice()*prods.getNum()) - 0.07*(prods.getPrice()*prods.getNum());
+				        else
+				        	subtotal = prods.getPrice()*prods.getNum();
 						tax = subtotal * 0.06;
 						total = subtotal + tax;
 						finaltax += tax;
 						finalsub += subtotal;
 						finaltotal += total;
 						sum += total;
-						System.out.printf("%-7s MovieTicket '%s' @ %s %40s%.2f  %s%.2f %s%.2f%n", prods.getCode(), ((MovieTicket) prods).getName(), ((MovieTicket) prods).getAddress().getStreet(), "$", subtotal, "$", tax, "$", total);
-						System.out.printf("        %1s%n", ((MovieTicket) prods).getDateTime());
+						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Movie Ticket '" + ((MovieTicket) prods).getName() + "' @ " + ((MovieTicket) prods).getAddress().getStreet(), subtotal, tax, total);
+						if (newDate.getDay() == 2 || newDate.getDay() == 4)
+							System.out.printf("        %1s (%d units @ $%.2f/unit - 7%% Tue/Thu Off)%n", date, prods.getNum(), prods.getPrice());
+						else
+							System.out.printf("        %1s (%d units @ $%.2f/unit)%n", date, prods.getNum(), prods.getPrice());
 					}
 					if (prods instanceof SeasonPass) {
-						subtotal = prods.getPrice();
+						String effectiveDate = ((SeasonPass) prods).getEffectiveDate();
+						System.out.println(effectiveDate);
+						String startDate = ((SeasonPass) prods).getStartDate();
+						System.out.println(startDate);
+						String endDate = ((SeasonPass) prods).getEndDate();
+						System.out.println(endDate);
+				
+					    subtotal = (prods.getPrice() + 8.00)*prods.getNum();
 						tax = subtotal * 0.06;
 						total = subtotal + tax;
 						finaltax += tax;
 						finalsub += subtotal;
 						finaltotal += total;
 						sum += total;
-						System.out.printf("%-7s Season Pass %40s%.2f %s%.2f %s%.2f%n", prods.getCode(), "$", subtotal, "$", tax, "$", total);
+						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Season Pass", subtotal, tax , total);
 					}
 					if (prods instanceof Refreshment) {
-						subtotal = prods.getPrice();
+						subtotal = prods.getPrice()*prods.getNum();
 						tax = subtotal * 0.04;
 						total = subtotal + tax;
 						finaltax += tax;
 						finalsub += subtotal;
 						finaltotal += total;
 						sum += total;
-						System.out.printf("%-7s Refreshment %s %40s%.2f  %s%.2f  %s%.2f%n", prods.getCode(), ((Refreshment) prods).getName(), "$", subtotal, "$", tax, "$", total);
+						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Refreshment " + ((Refreshment) prods).getName() + " (" + prods.getNum() + " @ $" + prods.getPrice() + "/unit)", subtotal, tax, total);
 					}
 			}
 			System.out.println("                                                                      ------------------------------------------");
-			System.out.printf("SUB-TOTALS %s%.2f %s%.2f %s%.2f\n", "$", finalsub, "$", finaltax, "$", finaltotal);
+			System.out.printf("%-65s $%10.2f $%10.2f $%10.2f\n", "SUB-TOTALS", finalsub, finaltax, finaltotal);
 			
 			
 			if (buyer instanceof Student) {
 				discount = (finaltax + (finalsub*0.08));
-				System.out.printf("DISCOUNT (8%% Student Discount %% NO Tax)           %s-%.2f\n", "$", discount);
-				System.out.println("Additional Fee (Validation)                        $ 6.75");
-				System.out.printf("TOTAL      %.2f\n", sum-discount+6.75);
+				System.out.printf("%-89s $%10.2f\n", "DISCOUNT (8% Student Discount & NO Tax)", -discount);
+				System.out.println("Additional Fee (Validation)                                                               $      6.75");
+				System.out.printf("%-89s $%10.2f\n", "TOTAL", sum-discount+6.75);
 			}
 			else
-				System.out.printf("TOTAL      %.2f\n", sum);
+				System.out.printf("%-89s $%10.2f\n", "TOTAL", sum);
 			
 			System.out.println();
 			System.out.println("-----------------------------------------------------------------------------------------------------------------");

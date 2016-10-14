@@ -67,22 +67,27 @@ public class InvoiceReport {
 			for (String i : parts[4].split(",")){
 				String[] itemParts = i.split(":");
 				for (Product j : products){
-					if (itemParts[0].equals(j.getCode())){
+					if (itemParts[0].equals(j.getCode())){			
 						if (j instanceof ParkingPass){
 							ParkingPass p = new ParkingPass((ParkingPass)(j));
 							if (itemParts.length == 3) p.discount();
+							p.setNum(Integer.parseInt(itemParts[1]));
 							cart.add(p);
 						}
 						else if (j instanceof MovieTicket){
 							MovieTicket m = new MovieTicket((MovieTicket)(j));
+							m.setNum(Integer.parseInt(itemParts[1]));
 							cart.add(m);
 						}
 						else if (j instanceof SeasonPass){
 							SeasonPass s = new SeasonPass((SeasonPass)(j));
+							s.setNum(Integer.parseInt(itemParts[1]));
+							s.setEffectiveDate(date);
 							cart.add(s);
 						}
 						else if (j instanceof Refreshment){
 							Refreshment r = new Refreshment((Refreshment)(j));
+							r.setNum(Integer.parseInt(itemParts[1]));
 							cart.add(r);
 						}
 						else System.out.println("ITEM NOT FOUND");
