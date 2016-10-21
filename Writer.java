@@ -111,9 +111,22 @@ public class Writer {
 			discount = 0.0;
 			sum = 0.0;
 			
+			int freePasses = 0;
+			int ticketCount = 0;
+			for (Product p : cart){
+				if (p instanceof MovieTicket) ticketCount++;
+			}
+			
 			for (Product prods : cart) {
 				if (prods instanceof ParkingPass) {
-					subtotal = prods.getPrice()*prods.getNum();
+					int free = 0;
+					int left = prods.getNum();
+					while (freePasses < ticketCount && left > 0){
+						free++;
+						freePasses++;
+						left--;
+					}
+					subtotal = prods.getPrice()*left;
 					tax = subtotal * 0.04;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -123,6 +136,10 @@ public class Writer {
 				}
 				if (prods instanceof MovieTicket) {
 					subtotal = prods.getPrice()*prods.getNum();
+					boolean discount = (((MovieTicket)prods).getDateTime().split(" ")[0]);
+					if (discount == true){
+						subtotal *= .93;
+					}
 					tax = subtotal * 0.06;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -132,6 +149,11 @@ public class Writer {
 				}
 				if (prods instanceof SeasonPass) {
 					subtotal = prods.getPrice()*prods.getNum();
+					int time1 = DateData.elapsedDays(invoice.getDate(), ((SeasonPass)prods).getEndDate());
+					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate, ((SeasonPass)prods).getEndDate());
+					if (time1 < time2){ //if it's midway through the season
+						subtotal *= ((double)time1)/time2; //prorate cost
+					subtotal += 8; //add convenience fee
 					tax = subtotal * 0.06;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -141,6 +163,7 @@ public class Writer {
 				}
 				if (prods instanceof Refreshment) {
 					subtotal = prods.getPrice()*prods.getNum();
+					if (ticketCount > 0) subtotal *= .95;
 					tax = subtotal * 0.04;
 					total = subtotal + tax;
 					finaltax += tax;
@@ -148,12 +171,12 @@ public class Writer {
 					finaltotal += total;
 					sum += total;
 				}
-		}
+			}
 
 			
 			if (buyer instanceof Student){
 				type = "[Student]";
-				discount = finaltax + (finalsub*0.08);
+				discount += finaltax + (finalsub*0.08);
 				fees = 6.75;
 				sum = sum + 6.75 - discount;
 			}
@@ -204,75 +227,76 @@ public class Writer {
 			System.out.println("  " + buyer.getAddress().getCity()+", "+buyer.getAddress().getState()+" "+buyer.getAddress().getZip()+" "+buyer.getAddress().getCountry());
 			System.out.println("=================================");
 			System.out.printf("%-7s %-58s %10s %11s %11s%n", "Code", "Item", "Subtotal", "Tax", "Total");
+			
+			int freePasses = 0;
+			int ticketCount = 0;
+			for (Product p : cart){
+				if (p instanceof MovieTicket) ticketCount++;
+			}
+			
 			for (Product prods : cart) {
-					if (prods instanceof ParkingPass) {
-						subtotal = prods.getPrice()*prods.getNum();
-						tax = subtotal * 0.04;
-						total = subtotal + tax;
-						finaltax += tax;
-						finalsub += subtotal;
-						finaltotal += total;
-						sum += total;
-						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Parking Pass (" + prods.getNum() +" units @ $"+ prods.getPrice()+"/unit)", subtotal, tax, total);
+				if (prods instanceof ParkingPass) {
+					int left = prods.getNum();
+					int free = 0;
+					while (freePasses < ticketCount && left > 0){
+						free++;
+						freePasses++;
+						left--;
 					}
-					if (prods instanceof MovieTicket) {
-						String date = ((MovieTicket) prods).getDateTime();
-						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					subtotal = prods.getPrice()*left;
+					tax = subtotal * 0.04;
+					total = subtotal + tax;
+					finaltax += tax;
+					finalsub += subtotal;
+					finaltotal += total;
+					sum += total;
+					System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Parking Pass (" + prods.getNum() +" units @ $"+ prods.getPrice()+"/unit with " + free + " free.");
 						
-						Date newDate = null;
-						
-				        try {
-				            newDate = formatter.parse(date);
-				        } catch (ParseException e) {
-				            e.printStackTrace();
-				        }
-						
-				        Calendar calendar = Calendar.getInstance();
-				        calendar.setTime(newDate);
-				        
-				        if (newDate.getDay() == 2 || newDate.getDay() == 4)
-				        	subtotal = (prods.getPrice()*prods.getNum()) - 0.07*(prods.getPrice()*prods.getNum());
-				        else
-				        	subtotal = prods.getPrice()*prods.getNum();
-						tax = subtotal * 0.06;
-						total = subtotal + tax;
-						finaltax += tax;
-						finalsub += subtotal;
-						finaltotal += total;
-						sum += total;
-						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Movie Ticket '" + ((MovieTicket) prods).getName() + "' @ " + ((MovieTicket) prods).getAddress().getStreet(), subtotal, tax, total);
-						if (newDate.getDay() == 2 || newDate.getDay() == 4)
-							System.out.printf("        %1s (%d units @ $%.2f/unit - 7%% Tue/Thu Off)%n", date, prods.getNum(), prods.getPrice());
-						else
-							System.out.printf("        %1s (%d units @ $%.2f/unit)%n", date, prods.getNum(), prods.getPrice());
+				}
+				if (prods instanceof MovieTicket) {
+					subtotal = prods.getPrice()*prods.getNum();
+					boolean discount = (((MovieTicket)prods).getDateTime().split(" ")[0]);
+					if (discount == true){
+						subtotal *= .93;
 					}
-					if (prods instanceof SeasonPass) {
-						String effectiveDate = ((SeasonPass) prods).getEffectiveDate();
-						System.out.println(effectiveDate);
-						String startDate = ((SeasonPass) prods).getStartDate();
-						System.out.println(startDate);
-						String endDate = ((SeasonPass) prods).getEndDate();
-						System.out.println(endDate);
-				
-					    subtotal = (prods.getPrice() + 8.00)*prods.getNum();
-						tax = subtotal * 0.06;
-						total = subtotal + tax;
-						finaltax += tax;
-						finalsub += subtotal;
-						finaltotal += total;
-						sum += total;
-						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Season Pass", subtotal, tax , total);
-					}
-					if (prods instanceof Refreshment) {
-						subtotal = prods.getPrice()*prods.getNum();
-						tax = subtotal * 0.04;
-						total = subtotal + tax;
-						finaltax += tax;
-						finalsub += subtotal;
-						finaltotal += total;
-						sum += total;
-						System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Refreshment " + ((Refreshment) prods).getName() + " (" + prods.getNum() + " @ $" + prods.getPrice() + "/unit)", subtotal, tax, total);
-					}
+					tax = subtotal * 0.06;
+					total = subtotal + tax;
+					finaltax += tax;
+					finalsub += subtotal;
+					finaltotal += total;
+					sum += total;
+					System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Movie Ticket '" + ((MovieTicket) prods).getName() + "' @ " + ((MovieTicket) prods).getAddress().getStreet(), subtotal, tax, total);
+					if (discount == true)
+						System.out.printf("        %1s (%d units @ $%.2f/unit - Tue/Thu 7%% Off)%n", ((MovieTicket) prods).getDateTime(), prods.getNum(), prods.getPrice());
+					else
+						System.out.printf("        %1s (%d units @ $%.2f/unit)%n", ((MovieTicket) prods).getDateTime(), prods.getNum(), prods.getPrice());
+				}
+				if (prods instanceof SeasonPass) {
+					subtotal = prods.getPrice()*prods.getNum();
+					int time1 = DateData.elapsedDays(invoice.getDate(), ((SeasonPass)prods).getEndDate());
+					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate, ((SeasonPass)prods).getEndDate());
+					if (time1 < time2){ //if it's midway through the season
+						subtotal *= ((double)time1)/time2; //prorate cost
+					subtotal += 8; //add convenience fee
+					tax = subtotal * 0.06;
+					total = subtotal + tax;
+					finaltax += tax;
+					finalsub += subtotal;
+					finaltotal += total;
+					sum += total;
+					System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Season Pass", subtotal, tax , total);
+				}
+				if (prods instanceof Refreshment) {
+					subtotal = prods.getPrice()*prods.getNum();
+					if (ticketCount > 0) subtotal *= .95;
+					tax = subtotal * 0.04;
+					total = subtotal + tax;
+					finaltax += tax;
+					finalsub += subtotal;
+					finaltotal += total;
+					sum += total;
+					System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Refreshment " + ((Refreshment) prods).getName() + " (" + prods.getNum() + " @ $" + prods.getPrice() + "/unit)", subtotal, tax, total);
+				}
 			}
 			System.out.println("                                                                      ------------------------------------------");
 			System.out.printf("%-65s $%10.2f $%10.2f $%10.2f\n", "SUB-TOTALS", finalsub, finaltax, finaltotal);
