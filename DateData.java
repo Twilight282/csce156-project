@@ -2,13 +2,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class DateData {
-
-	public static void main(String[] args) {
-		String String1 = "2012-04-12";
-		String String2 = "2012-06-12";
-		System.out.println(elapsedDays(String1, String2));
-		System.out.println(tuesOrThurs(String1));
-	}
 	
 	public static int elapsedDays(String a, String b){ //let it be a given that a and b are both of format yyyy-mm-dd
 		String[] partsa = a.split("-");
