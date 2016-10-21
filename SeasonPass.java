@@ -24,7 +24,7 @@ public class SeasonPass extends Ticket{
   }
   
   public void setEffectiveDate(String date){
-    if (date > this.effectiveDate){ //checks to see if new date is partly through season.
+    if (date.compareTo(this.effectiveDate) < 0){ //checks to see if new date is partly through season.
       this.effectiveDate = date;
     }
   }
