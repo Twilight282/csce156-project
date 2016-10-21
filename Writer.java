@@ -136,8 +136,8 @@ public class Writer {
 				}
 				if (prods instanceof MovieTicket) {
 					subtotal = prods.getPrice()*prods.getNum();
-					boolean discount = (((MovieTicket)prods).getDateTime().split(" ")[0]);
-					if (discount == true){
+					boolean cheaper = DateData.tuesOrThurs(((MovieTicket)prods).getDateTime().split(" ")[0]);
+					if (cheaper == true){
 						subtotal *= .93;
 					}
 					tax = subtotal * 0.06;
@@ -149,8 +149,8 @@ public class Writer {
 				}
 				if (prods instanceof SeasonPass) {
 					subtotal = prods.getPrice()*prods.getNum();
-					int time1 = DateData.elapsedDays(invoice.getDate(), ((SeasonPass)prods).getEndDate());
-					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate, ((SeasonPass)prods).getEndDate());
+					int time1 = DateData.elapsedDays(inv.getDate(), ((SeasonPass)prods).getEndDate());
+					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate(), ((SeasonPass)prods).getEndDate());
 					if (time1 < time2){ //if it's midway through the season
 						subtotal *= ((double)time1)/time2; //prorate cost
 					subtotal += 8; //add convenience fee
@@ -195,7 +195,7 @@ public class Writer {
 		System.out.printf("%-67s $%10.2f $%10.2f $%10.2f $%10.2f $%10.2f\n", "TOTAL", totalsub, totaltax, totaltotal, totaldiscount, totalsum);
 		System.out.println();
 		
-		for (Invoice inv : invoice) {
+		for (Invoice inv2 : invoice) {
 			subtotal = 0.0;
 			tax = 0.0;
 			total = 0.0;
@@ -205,40 +205,40 @@ public class Writer {
 			discount = 0.0;
 			sum = 0.0;
 			
-			String code = inv.getCode();
-			Customer buyer = inv.getBuyer();
-			Person seller = inv.getSeller();
-			Person contact = inv.getContact();
-			ArrayList<Product> cart = inv.getCart();
+			String code2 = inv2.getCode();
+			Customer buyer2 = inv2.getBuyer();
+			Person seller2 = inv2.getSeller();
+			Person contact2 = inv2.getContact();
+			ArrayList<Product> cart2 = inv2.getCart();
 				
 			System.out.println("Individual Invoice Detail Reports");
 			System.out.println("=================================");
-			System.out.println(code);
+			System.out.println(code2);
 			System.out.println("=================================");
-			System.out.printf("Salesperson: %s, %s\n", seller.getName().getLast(), seller.getName().getFirst());
+			System.out.printf("Salesperson: %s, %s\n", seller2.getName().getLast(), seller2.getName().getFirst());
 			System.out.println("Customer Info:");
-			System.out.printf("  %s (%s)\n", buyer.getName(), inv.getBuyerCode());
-			if (buyer instanceof Student)
+			System.out.printf("  %s (%s)\n", buyer2.getName(), inv2.getBuyerCode());
+			if (buyer2 instanceof Student)
 				System.out.println("  [Student]");
 			else
 				System.out.println("  [General]");
-			System.out.println("  " + contact.getName().getLast() + ", " + contact.getName().getFirst());
-			System.out.println("  " + buyer.getAddress().getStreet());
-			System.out.println("  " + buyer.getAddress().getCity()+", "+buyer.getAddress().getState()+" "+buyer.getAddress().getZip()+" "+buyer.getAddress().getCountry());
+			System.out.println("  " + contact2.getName().getLast() + ", " + contact2.getName().getFirst());
+			System.out.println("  " + buyer2.getAddress().getStreet());
+			System.out.println("  " + buyer2.getAddress().getCity()+", "+buyer2.getAddress().getState()+" "+buyer2.getAddress().getZip()+" "+buyer2.getAddress().getCountry());
 			System.out.println("=================================");
 			System.out.printf("%-7s %-58s %10s %11s %11s%n", "Code", "Item", "Subtotal", "Tax", "Total");
 			
-			int freePasses = 0;
-			int ticketCount = 0;
-			for (Product p : cart){
+			int freePass = 0;
+			int tCount = 0;
+			for (Product p : cart2){
 				if (p instanceof MovieTicket) ticketCount++;
 			}
 			
-			for (Product prods : cart) {
+			for (Product prods : cart2) {
 				if (prods instanceof ParkingPass) {
 					int left = prods.getNum();
 					int free = 0;
-					while (freePasses < ticketCount && left > 0){
+					while (freePass < tCount && left > 0){
 						free++;
 						freePasses++;
 						left--;
@@ -255,8 +255,8 @@ public class Writer {
 				}
 				if (prods instanceof MovieTicket) {
 					subtotal = prods.getPrice()*prods.getNum();
-					boolean discount = (((MovieTicket)prods).getDateTime().split(" ")[0]);
-					if (discount == true){
+					boolean cheaper = DateData.tuesOrThurs(((MovieTicket)prods).getDateTime().split(" ")[0]);
+					if (cheaper == true){
 						subtotal *= .93;
 					}
 					tax = subtotal * 0.06;
@@ -266,15 +266,15 @@ public class Writer {
 					finaltotal += total;
 					sum += total;
 					System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Movie Ticket '" + ((MovieTicket) prods).getName() + "' @ " + ((MovieTicket) prods).getAddress().getStreet(), subtotal, tax, total);
-					if (discount == true)
+					if (cheaper == true)
 						System.out.printf("        %1s (%d units @ $%.2f/unit - Tue/Thu 7%% Off)%n", ((MovieTicket) prods).getDateTime(), prods.getNum(), prods.getPrice());
 					else
 						System.out.printf("        %1s (%d units @ $%.2f/unit)%n", ((MovieTicket) prods).getDateTime(), prods.getNum(), prods.getPrice());
 				}
 				if (prods instanceof SeasonPass) {
 					subtotal = prods.getPrice()*prods.getNum();
-					int time1 = DateData.elapsedDays(invoice.getDate(), ((SeasonPass)prods).getEndDate());
-					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate, ((SeasonPass)prods).getEndDate());
+					int time1 = DateData.elapsedDays(inv2.getDate(), ((SeasonPass)prods).getEndDate());
+					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate(), ((SeasonPass)prods).getEndDate());
 					if (time1 < time2){ //if it's midway through the season
 						subtotal *= ((double)time1)/time2; //prorate cost
 					subtotal += 8; //add convenience fee
@@ -317,3 +317,4 @@ public class Writer {
 		}
 	}
 }
+}}
