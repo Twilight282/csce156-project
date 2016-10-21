@@ -1,32 +1,29 @@
 public class ParkingPass extends Service{
 
-  private boolean discounted;
+  private String discountCode;
 
   //parking passes for our services
   
   public ParkingPass(String code, double price){
     super(code, price);
-    this.discounted = false;
+    this.discountCode = null;
   }
   
   public ParkingPass(ParkingPass p){
 	super(p.getCode(), p.price);
-	this.discounted = false;
+	this.discountCode = p.getDiscountCode();
   }
   
   public double getPrice(){
-	  if (this.discounted == true){
-		  return this.price*this.num;
-	  }
-	  else return 0;
+	  return this.price;
   }
   
-  public void discount(){
-    this.discounted = true;
+  public void discount(String code){
+    this.discountCode = code;
   }
 
-  public boolean getDiscounted(){
-    return this.discounted;
+  public String getDiscountCode(){
+    return this.discountCode;
   }
 
 }

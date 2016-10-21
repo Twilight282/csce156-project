@@ -70,7 +70,7 @@ public class InvoiceReport {
 					if (itemParts[0].equals(j.getCode())){			
 						if (j instanceof ParkingPass){
 							ParkingPass p = new ParkingPass((ParkingPass)(j));
-							if (itemParts.length == 3) p.discount();
+							if (itemParts.length == 3) p.discount(itemParts[2]);
 							p.setNum(Integer.parseInt(itemParts[1]));
 							cart.add(p);
 						}
