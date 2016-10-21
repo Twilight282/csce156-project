@@ -8,12 +8,14 @@ public class Invoice{
   private ArrayList<Product> cart;
   private Person contact;
   private String buyerCode;
+  private String date;
   
   //our class for all invoices for products
   
   public Invoice(String code, Customer buyer, Person seller, String date, ArrayList<Product> cart, Person contact, String buyerCode){
     this.code = code;
     this.buyer = buyer;
+    this.date = date;
     this.seller = seller;
     this.cart = cart;
     this.buyerCode = buyerCode;
@@ -43,5 +45,8 @@ public class Invoice{
   public String getBuyerCode(){
 	    return this.buyerCode;
 }
+  public String getDate(){
+	  return this.date;
+  }
   
 }
