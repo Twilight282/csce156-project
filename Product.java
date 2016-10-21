@@ -18,7 +18,7 @@ public class Product{
 	  }
 
   public double getPrice(){
-    return this.price * this.num;
+    return this.price;
   }
   
   public String getCode(){

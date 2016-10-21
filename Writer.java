@@ -90,6 +90,9 @@ public class Writer {
 		double totalsub = 0, totaltax = 0, totaltotal = 0, totaldiscount = 0.0, totalsum = 0.0;
 		double discount = 0.0;
 		double sum = 0.0;
+		int freePasses = 0;
+		int ticketCount = 0;
+		Customer buyer = null;
 		String type;
 		
 		System.out.println("========================");
@@ -98,7 +101,7 @@ public class Writer {
 		System.out.printf("%-15s %-30s %-20s %11s %11s %11s %11s %11s\n", "Invoice", "Customer", "Salesperon", "Subtotal", "Fees", "Taxes", "Discount", "Total");
 		for (Invoice inv : invoice) {
 			String code = inv.getCode();
-			Customer buyer = inv.getBuyer();
+			buyer = inv.getBuyer();
 			Person seller = inv.getSeller();
 			ArrayList<Product> cart = inv.getCart();
 			
@@ -111,8 +114,7 @@ public class Writer {
 			discount = 0.0;
 			sum = 0.0;
 			
-			int freePasses = 0;
-			int ticketCount = 0;
+			
 			for (Product p : cart){
 				if (p instanceof MovieTicket) ticketCount++;
 			}
@@ -151,7 +153,7 @@ public class Writer {
 					subtotal = prods.getPrice()*prods.getNum();
 					int time1 = DateData.elapsedDays(inv.getDate(), ((SeasonPass)prods).getEndDate());
 					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate(), ((SeasonPass)prods).getEndDate());
-					if (time1 < time2){ //if it's midway through the season
+					if (time1 < time2) //if it's midway through the season
 						subtotal *= ((double)time1)/time2; //prorate cost
 					subtotal += 8; //add convenience fee
 					tax = subtotal * 0.06;
@@ -191,9 +193,15 @@ public class Writer {
 			totaldiscount += discount;
 			totalsum += sum;
 		}
+
 		System.out.println("===========================================================================================================================================================================");
 		System.out.printf("%-67s $%10.2f $%10.2f $%10.2f $%10.2f $%10.2f\n", "TOTAL", totalsub, totaltax, totaltotal, totaldiscount, totalsum);
 		System.out.println();
+		
+		String code2;
+		Customer buyer2;
+		Person seller2;
+		Person contact2;
 		
 		for (Invoice inv2 : invoice) {
 			subtotal = 0.0;
@@ -205,10 +213,10 @@ public class Writer {
 			discount = 0.0;
 			sum = 0.0;
 			
-			String code2 = inv2.getCode();
-			Customer buyer2 = inv2.getBuyer();
-			Person seller2 = inv2.getSeller();
-			Person contact2 = inv2.getContact();
+			code2 = inv2.getCode();
+			buyer2 = inv2.getBuyer();
+			seller2 = inv2.getSeller();
+			contact2 = inv2.getContact();
 			ArrayList<Product> cart2 = inv2.getCart();
 				
 			System.out.println("Individual Invoice Detail Reports");
@@ -250,7 +258,7 @@ public class Writer {
 					finalsub += subtotal;
 					finaltotal += total;
 					sum += total;
-					System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Parking Pass (" + prods.getNum() +" units @ $"+ prods.getPrice()+"/unit with " + free + " free.");
+					System.out.printf("%-7s %-57s $%10.2f $%10.2f $%10.2f%n", prods.getCode(), "Parking Pass (" + prods.getNum() +" units @ $"+ prods.getPrice()+"/unit with " + free + " free.", subtotal, tax, total);
 						
 				}
 				if (prods instanceof MovieTicket) {
@@ -275,7 +283,7 @@ public class Writer {
 					subtotal = prods.getPrice()*prods.getNum();
 					int time1 = DateData.elapsedDays(inv2.getDate(), ((SeasonPass)prods).getEndDate());
 					int time2 = DateData.elapsedDays(((SeasonPass)prods).getStartDate(), ((SeasonPass)prods).getEndDate());
-					if (time1 < time2){ //if it's midway through the season
+					if (time1 < time2) //if it's midway through the season
 						subtotal *= ((double)time1)/time2; //prorate cost
 					subtotal += 8; //add convenience fee
 					tax = subtotal * 0.06;
@@ -314,7 +322,8 @@ public class Writer {
 			System.out.println();
 			System.out.println("-----------------------------------------------------------------------------------------------------------------");
 			System.out.println();
+			}
 		}
 	}
-}
-}}
+
+
