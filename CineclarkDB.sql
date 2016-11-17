@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `SeasonPasses`;
 CREATE TABLE `SeasonPasses` (
 	`ProductID` int(11) NOT NULL,
 	`PassName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-	`Price` decimal(5,2) Not Null Default '0',
+	`Price` decimal(5,2) Not Null,
 	`StartDate` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`EndDate` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	PRIMARY KEY (`ProductID`),
@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS `ParkingPasses`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ParkingPasses` (
 	`ProductID` int(11) NOT NULL,
-	`Price` decimal(5,2) Not Null Default '0',
+	`Price` decimal(5,2) Not Null,
 	PRIMARY KEY (`ProductID`),
 	FOREIGN KEY (`ProductID`) REFERENCES Products(`ProductID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -131,14 +131,14 @@ DROP TABLE IF EXISTS `InvoiceProducts`;
 CREATE TABLE `InvoiceProducts` (
 	`ProductID` int(11) NOT NULL,
     `InvoiceID` int(11) NOT NULL,
-    `Quantity` int(11) NOT NULL DEFAULT '1',
+    `Quantity` int(11) NOT NULL,
     FOREIGN KEY (`ProductID`) REFERENCES Products(`ProductID`),
     FOREIGN KEY (`InvoiceID`) REFERENCES Invoices(`InvoiceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `InvoiceProducts` DISABLE KEYS */;
-INSERT INTO `InvoiceProducts` VALUES (0,0,1),(4,0,2),(10,0,1),(6,1,3),(5,1,2),(8,2,5),(4,2,1),(6,2,2),(9,3,4),(2,3,2);
+INSERT INTO `InvoiceProducts` VALUES (0,0,1),(4,0,2),(10,0,1),(6,1,3),(5,1,2),(8,2,5),(4,2,1),(6,2,2),(6,2,4),(9,3,4),(2,3,2);
 /*!40000 ALTER TABLE `InvoiceProducts` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `Invoices`;
@@ -156,7 +156,7 @@ CREATE TABLE `Invoices` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Invoices` DISABLE KEYS */;
-INSERT INTO `Invoices` VALUES (0,1,8765,'10/27/2016'),(1,2,4321,'10/25/2016'),(2,3,7531,'10/10/2016'),(3,4,8642,'11/1/2016');
+INSERT INTO `Invoices` VALUES (0,1,4321,'10/27/2016'),(1,2,4321,'10/25/2016'),(2,3,7531,'10/10/2016'),(3,4,8642,'11/1/2016');
 /*!40000 ALTER TABLE `Invoices` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `Customers`;
