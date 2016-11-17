@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class InvoiceWriter {
 	
-	public static void invoiceWriter(ArrayList<Invoice> invoice){
+	public static void invoiceWriter(LinkedList<Invoice> invoices){
 		double totalSub = 0;
 		double totalFees = 0;
 		double totalTax = 0;
@@ -16,7 +16,8 @@ public class InvoiceWriter {
 		System.out.println("Executive Summary Report");
 		System.out.println("========================");
 		System.out.printf("%-15s %-35s %-20s %11s %11s %11s %11s %11s\n", "Invoice", "Customer", "Salesperon", "Subtotal", "Fees", "Taxes", "Discount", "Total");
-		for (Invoice inv : invoice) {
+		for (int i = 0; i < invoices.getLength(); i++) {
+			Invoice inv = invoices.get(i);
 			String code = inv.getCode();
 			buyer = inv.getBuyer();
 			Person seller = inv.getSeller();
@@ -43,7 +44,8 @@ public class InvoiceWriter {
 		
 		double subtotal,tax,total,finalsub,finaltax,finaltotal,discount,sum;
 		
-		for (Invoice inv2 : invoice) {
+		for (int i = 0; i < invoices.getLength(); i++) {
+			Invoice inv2 = invoices.get(i);
 			subtotal = 0.0;
 			tax = 0.0;
 			total = 0.0;

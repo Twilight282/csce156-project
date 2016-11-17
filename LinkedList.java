@@ -1,5 +1,4 @@
-
-public class LinkedList<T> {
+public class LinkedList<T>{
 	
 	private LinkedNode<T> start;
 	private int length;
@@ -73,6 +72,22 @@ public class LinkedList<T> {
 		return false;
 	}
 	
+	public T get(int index){
+		if (index == 0){
+			return start.getItem();
+		}
+		LinkedNode<T> spot = start.getNext();
+		for (int i = 1; i < length; i++){
+			if (spot == null) break;
+			if (i == index){
+				return spot.getItem();
+			}
+			spot = spot.getNext();
+		}
+			
+		return null;
+	}
+	
 	public int getLength(){
 		return length;
 	}
@@ -86,4 +101,5 @@ public class LinkedList<T> {
 		}
 		return s;
 	}
+
 }

@@ -15,12 +15,12 @@ public class InvoiceReport {
 		products = fc.loadProducts();   //creates Product list
 		customers = fc.loadCustomers(); //creates Customer list
 		persons = fc.loadPersons(); //creates Employee list
-		ArrayList<Invoice> invoices = loadInvoices();
+		LinkedList<Invoice> invoices = loadInvoices();
 		InvoiceWriter.invoiceWriter(invoices);
 		
 	}
 
-	public static ArrayList<Invoice> loadInvoices(){
+	public static LinkedList<Invoice> loadInvoices(){
 		Scanner reads = null;
 		try{
 			reads = new Scanner(new File("data/Invoices.dat"));
@@ -31,7 +31,7 @@ public class InvoiceReport {
 		}
 		int n = Integer.parseInt(reads.nextLine().trim());
 		
-		ArrayList<Invoice> invs = new ArrayList<Invoice>();
+		LinkedList<Invoice> invs = new LinkedList<Invoice>();
 		
 		while (reads.hasNextLine()){
 			String line = reads.nextLine();
