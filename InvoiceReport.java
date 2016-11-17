@@ -16,7 +16,7 @@ public class InvoiceReport {
 		customers = fc.loadCustomers(); //creates Customer list
 		persons = fc.loadPersons(); //creates Employee list
 		ArrayList<Invoice> invoices = loadInvoices();
-		Writer.invoiceWriter(invoices);
+		InvoiceWriter.invoiceWriter(invoices);
 		
 	}
 
