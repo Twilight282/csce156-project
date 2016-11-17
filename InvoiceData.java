@@ -1,5 +1,7 @@
 package com.ceg.ext;
 
+import java.sql.*;
+
 /*
  * This is a collection of utility methods that define a general API for
  * interacting with the database supporting this application.
@@ -9,11 +11,67 @@ package com.ceg.ext;
  */
 
 public class InvoiceData {
+	
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
+	static final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/nesser";
+	
+	static final String USER = "nesser";
+	static final String PASS = "Dh97eQ";
 
+	static public Connection getConnection()
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		} catch (InstantiationException e) {
+			System.out.println("InstantiationException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			System.out.println("IllegalAccessException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection(InvoiceData.DB_URL, InvoiceData.USER, InvoiceData.PASS);
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		return conn;
+	}
+
+	
+	
 	/**
 	 * 1. Method that removes every person record from the database
 	 */
-	public static void removeAllPersons() {}
+	public static void removeAllPersons() {
+		Connection conn = InvoiceData.getConnection();
+		PreparedStatement ps;
+		ResultSet rs;
+		
+		String removePerson = "DELETE * FROM Persons;";
+		
+		try {
+			ps = conn.prepareStatement(removePerson);
+			ps.executeQuery();
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * 2. Method to add a person record to the database with the provided data.
