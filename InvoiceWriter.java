@@ -22,6 +22,8 @@ public class InvoiceWriter {
 			buyer = inv.getBuyer();
 			Person seller = inv.getSeller();
 			
+			System.out.println();
+			
 			if (buyer instanceof Student) type = "[Student]";
 			else type = "[General]";
 			

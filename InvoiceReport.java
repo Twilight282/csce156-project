@@ -12,14 +12,15 @@ public class InvoiceReport {
 	
 	public static void main(String[] args) {
 		FlatConverter fc = new FlatConverter();        //creates converter
-		products = fc.loadProducts();   //creates Product list
-		customers = fc.loadCustomers(); //creates Customer list
-		persons = fc.loadPersons(); //creates Employee list
-		LinkedList<Invoice> invoices = loadInvoices();
+		DBConverter dbc = new DBConverter();
+		products = dbc.loadProducts();   //creates Product list
+		customers = dbc.loadCustomers(); //creates Customer list
+		persons = dbc.loadPersons(); //creates Employee list
+		LinkedList<Invoice> invoices = dbc.loadInvoices();
 		InvoiceWriter.invoiceWriter(invoices);
 		
 	}
-
+/*
 	public static LinkedList<Invoice> loadInvoices(){
 		Scanner reads = null;
 		try{
@@ -51,8 +52,11 @@ public class InvoiceReport {
 
 			Person seller = null;
 			String sellerCode = parts[2].trim();
+			
+			System.out.println("looking for: " + sellerCode);
 
 			for (Person i : persons){
+				System.out.println(i.getCode());
 				if (i.getCode().equals(sellerCode)){
 					seller = i;
 				}
@@ -101,5 +105,5 @@ public class InvoiceReport {
 		}
 		reads.close();
 		return invs;
-	}
+	}*/
 }
