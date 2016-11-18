@@ -404,6 +404,42 @@ public class InvoiceData {
 	 */
 
 	public static void addMovieTicketToInvoice(String invoiceCode, String productCode, int quantity) {
+		Connection conn = InvoiceData.getConnection();
+		PreparedStatement ps;
+		String idQuery = "Select * from MovieTickets where ProductCode = ?;";
+		String invQuery = "Select * from Invoices where InvoiceCode = ?;";
+		ResultSet rs;
+						
+		try {
+			ps = conn.prepareStatement(idQuery);
+			ps.setString(1, productCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int productID = rs.getInt("ProductID");
+			
+			ps = conn.prepareStatement(invQuery);
+			ps.setString(1, invoiceCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int invoiceID = rs.getInt("InvoiceID");
+			
+			String addMovie = "INSERT INTO InvoiceProducts (ProductID, ProductCode, InvoiceID, Quantity) values (?, ?, ?, ?);";
+						
+			ps = conn.prepareStatement(addMovie);
+			ps.setInt(1, productID);
+			ps.setString(2, productCode);
+			ps.setInt(3, invoiceID);
+			ps.setInt(4, quantity);
+			ps.executeQuery();
+			ps.close();
+			
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 		
 	}
 
@@ -412,7 +448,44 @@ public class InvoiceData {
 	 * to an invoice corresponding to the provided <code>invoiceCode</code> with
 	 * the given begin/end dates
 	 */
-	public static void addSeasonPassToInvoice(String invoiceCode, String productCode, int quantity) {}
+	public static void addSeasonPassToInvoice(String invoiceCode, String productCode, int quantity) {
+		Connection conn = InvoiceData.getConnection();
+		PreparedStatement ps;
+		String idQuery = "Select * from SeasonPasses where ProductCode = ?;";
+		String invQuery = "Select * from Invoices where InvoiceCode = ?;";
+		ResultSet rs;
+						
+		try {
+			ps = conn.prepareStatement(idQuery);
+			ps.setString(1, productCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int productID = rs.getInt("ProductID");
+			
+			ps = conn.prepareStatement(invQuery);
+			ps.setString(1, invoiceCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int invoiceID = rs.getInt("InvoiceID");
+			
+			String addProduct = "INSERT INTO InvoiceProducts (ProductID, ProductCode, InvoiceID, Quantity) values (?, ?, ?, ?);";
+						
+			ps = conn.prepareStatement(addProduct);
+			ps.setInt(1, productID);
+			ps.setString(2, productCode);
+			ps.setInt(3, invoiceID);
+			ps.setInt(4, quantity);
+			ps.executeQuery();
+			ps.close();
+			
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 
      /**
      * 14. Adds a particular ParkingPass (corresponding to <code>productCode</code> to an 
@@ -420,13 +493,87 @@ public class InvoiceData {
      * number of quantity.
      * NOTE: ticketCode may be null
      */
-    public static void addParkingPassToInvoice(String invoiceCode, String productCode, int quantity, String ticketCode) {}
+    public static void addParkingPassToInvoice(String invoiceCode, String productCode, int quantity, String ticketCode) {
+		Connection conn = InvoiceData.getConnection();
+		PreparedStatement ps;
+		String idQuery = "Select * from ParkingPasses where ProductCode = ?;";
+		String invQuery = "Select * from Invoices where InvoiceCode = ?;";
+		ResultSet rs;
+						
+		try {
+			ps = conn.prepareStatement(idQuery);
+			ps.setString(1, productCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int productID = rs.getInt("ProductID");
+			
+			ps = conn.prepareStatement(invQuery);
+			ps.setString(1, invoiceCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int invoiceID = rs.getInt("InvoiceID");
+			
+			String addProduct = "INSERT INTO InvoiceProducts (ProductID, ProductCode, InvoiceID, Quantity) values (?, ?, ?, ?);";
+						
+			ps = conn.prepareStatement(addProduct);
+			ps.setInt(1, productID);
+			ps.setString(2, productCode);
+			ps.setInt(3, invoiceID);
+			ps.setInt(4, quantity);
+			ps.executeQuery();
+			ps.close();
+			
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 	
     /**
      * 15. Adds a particular refreshment (corresponding to <code>productCode</code> to an 
      * invoice corresponding to the provided <code>invoiceCode</code> with the given
      * number of quantity. 
      */
-    public static void addRefreshmentToInvoice(String invoiceCode, String productCode, int quantity) {}
+    public static void addRefreshmentToInvoice(String invoiceCode, String productCode, int quantity) {
+		Connection conn = InvoiceData.getConnection();
+		PreparedStatement ps;
+		String idQuery = "Select * from Refreshments where ProductCode = ?;";
+		String invQuery = "Select * from Invoices where InvoiceCode = ?;";
+		ResultSet rs;
+						
+		try {
+			ps = conn.prepareStatement(idQuery);
+			ps.setString(1, productCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int productID = rs.getInt("ProductID");
+			
+			ps = conn.prepareStatement(invQuery);
+			ps.setString(1, invoiceCode);
+			rs = ps.executeQuery();
+			rs.next();
+			int invoiceID = rs.getInt("InvoiceID");
+			
+			String addProduct = "INSERT INTO InvoiceProducts (ProductID, ProductCode, InvoiceID, Quantity) values (?, ?, ?, ?);";
+						
+			ps = conn.prepareStatement(addProduct);
+			ps.setInt(1, productID);
+			ps.setString(2, productCode);
+			ps.setInt(3, invoiceID);
+			ps.setInt(4, quantity);
+			ps.executeQuery();
+			ps.close();
+			
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 
 }
