@@ -64,16 +64,19 @@ CREATE TABLE `MovieTickets` (
 	`MovieName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`Price` decimal(5,2) Not Null,
 	`Date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-    `AddressID` int(60) NOT NULL,
+	`Street` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+	`City` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`State` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`Zip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`Country` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `ScreenNumber` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	PRIMARY KEY (`ProductID`),
-	FOREIGN KEY (`ProductID`) REFERENCES Products(`ProductID`),
-    FOREIGN KEY (`AddressID`) REFERENCES Addresses(`AddressID`)
+	FOREIGN KEY (`ProductID`) REFERENCES Products(`ProductID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `MovieTickets` DISABLE KEYS */;
-INSERT INTO `MovieTickets` VALUES (2,'qwer','Con Air',10.25,'2010-04-13 4:02',3,'3D'),(4,'wert','Generic Movie',11.1,'2012-06-12 1:10',1,'ee'),(5,'erty','That Film Guy',22.8,'2007-01-28',2,'10');
+INSERT INTO `MovieTickets` VALUES (2,'qwer','Con Air',10.25,'2010-04-13 4:02','7320 N. 17th', 'Lincoln', 'NE', '68521','USA','3D'),(4,'wert','Generic Movie',11.1,'2012-06-12 1:10','3431 Webster St.', 'Omaha', 'NE', '68131','USA','ee'),(5,'erty','That Film Guy',22.8,'2007-01-28','872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA','10');
 /*!40000 ALTER TABLE `MovieTickets` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `SeasonPasses`;
@@ -111,38 +114,20 @@ CREATE TABLE `ParkingPasses` (
 INSERT INTO `ParkingPasses` VALUES (3,'rtyu',1.11),(6,'tyui',2.22),(9,'yuio',3.43);
 /*!40000 ALTER TABLE `ParkingPasses` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `Addresses`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Addresses` (
-	`AddressID` int(11) NOT NULL AUTO_INCREMENT,
-	`Street` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-	`City` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-	`State` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-	`Zip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-	`Country` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-	PRIMARY KEY (`AddressID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-/*!40000 ALTER TABLE `Addresses` DISABLE KEYS */;
-INSERT INTO `Addresses` VALUES (1, '7320 N. 17th', 'Lincoln', 'NE', '68521','USA'),(2, '3431 Webster St.', 'Omaha', 'NE', '68131','USA'),(3, '872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA');
-/*!40000 ALTER TABLE `Addresses` ENABLE KEYS */;
-
 DROP TABLE IF EXISTS `InvoiceProducts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `InvoiceProducts` (
 	`ProductID` int(11) NOT NULL,
+	`ProductCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
     `InvoiceID` int(11) NOT NULL,
     `Quantity` int(11) NOT NULL,
-    FOREIGN KEY (`ProductID`) REFERENCES Products(`ProductID`),
     FOREIGN KEY (`InvoiceID`) REFERENCES Invoices(`InvoiceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `InvoiceProducts` DISABLE KEYS */;
-INSERT INTO `InvoiceProducts` VALUES (0,0,1),(4,0,2),(10,0,1),(6,1,3),(5,1,2),(8,2,5),(4,2,1),(6,2,2),(6,2,4),(9,3,4),(2,3,2);
+INSERT INTO `InvoiceProducts` VALUES (0,'qscv',0,1),(4,'wert',0,2),(10,'sdfo',0,1),(6,'tyui',1,3),(5,'erty',1,2),(8,'wegs',2,5),(4,'wert',2,1),(6,'tyui',2,2),(6,'tyui',2,4),(9,'yuio',3,4),(2,'qwer',3,2);
 /*!40000 ALTER TABLE `InvoiceProducts` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `Invoices`;
@@ -152,7 +137,9 @@ CREATE TABLE `Invoices` (
 	`InvoiceID` int(11) NOT NULL AUTO_INCREMENT,
 	`InvoiceCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
 	`CustomerID` int(11) NOT NULL,
+    `CustomerCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `PersonID` int(11) NOT NULL,
+    `PersonCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`Date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	PRIMARY KEY (`InvoiceID`),
     FOREIGN KEY (`CustomerID`) REFERENCES Customers(`CustomerID`),
@@ -173,16 +160,19 @@ CREATE TABLE `Customers` (
 	`CustomerName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`ContactID` int(11) NOT NULL,
     `CustomerType` int(11) NOT NULL,
-	`AddressID` int(11) NOT NULL,
-	PRIMARY KEY (`CustomerID`),
+	`Street` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+	`City` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`State` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`Zip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`Country` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	PRIMARY KEY (`CustomerID`,`CustomerCode`),
     FOREIGN KEY (`ContactID`) REFERENCES Persons(`PersonID`),
-    FOREIGN KEY (`AddressID`) REFERENCES Addresses(`AddressID`),
     FOREIGN KEY (`CustomerType`) REFERENCES CustomerTypes(`CustomerType`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
-INSERT INTO `Customers` VALUES (1,'1234','John Doe',4321,1,1),(2,'2345','Mary Sue',8765,2,2),(3,'3456','Bill Shankly',8642,1,3),(4,'4567','Steven Gerrard',7531,1,1);
+INSERT INTO `Customers` VALUES (1,'1234','John Doe',4321,1,'7320 N. 17th', 'Lincoln', 'NE', '68521','USA'),(2,'2345','Mary Sue',8765,2,'3431 Webster St.', 'Omaha', 'NE', '68131','USA'),(3,'3456','Bill Shankly',8642,1,'872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA'),(4,'4567','Steven Gerrard',7531,1,'872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA');
 /*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `CustomerTypes`;
@@ -206,14 +196,17 @@ CREATE TABLE `Persons` (
 	`PersonID` int(11) NOT NULL AUTO_INCREMENT,
 	`PersonCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`PersonName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-	`AddressID` int(11) NOT NULL,
-	PRIMARY KEY (`PersonID`),
-    FOREIGN KEY (`AddressID`) REFERENCES Addresses(`AddressID`)
+	`Street` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+	`City` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`State` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`Zip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	`Country` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+	PRIMARY KEY (`PersonID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Persons` DISABLE KEYS */;
-INSERT INTO `Persons` VALUES (4321,'4321','Lionel Messi', 1),(8765,'5432','Coutinho',2),(8642,'6543','Firmino',3),(7531,'7654','Joel Matip',4);
+INSERT INTO `Persons` VALUES (4321,'4321','Lionel Messi', '7320 N. 17th', 'Lincoln', 'NE', '68521','USA'),(8765,'5432','Coutinho','3431 Webster St.', 'Omaha', 'NE', '68131','USA'),(8642,'6543','Firmino','872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA'),(7531,'7654','Joel Matip','3431 Webster St.', 'Omaha', 'NE', '68131','USA');
 /*!40000 ALTER TABLE `Persons` ENABLE KEYS */;
 
 
