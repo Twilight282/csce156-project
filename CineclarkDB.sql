@@ -148,7 +148,7 @@ CREATE TABLE `Invoices` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Invoices` DISABLE KEYS */;
-INSERT INTO `Invoices` VALUES (0,'fdsa',1,4321,'10/27/2016'),(1,'gfds',2,4321,'10/25/2016'),(2,'hgfd',3,7531,'10/10/2016'),(3,'jhgf',4,8642,'11/1/2016');
+INSERT INTO `Invoices` VALUES (0,'fdsa',1,'1234',4321,'4321','10/27/2016'),(1,'gfds',2,'2345',4321,'5432','10/25/2016'),(2,'hgfd',3,'3456',7531,'6543','10/10/2016'),(3,'jhgf',4,'1234',8642,'4321','11/1/2016');
 /*!40000 ALTER TABLE `Invoices` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `Customers`;
