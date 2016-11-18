@@ -13,10 +13,10 @@ import java.sql.*;
 public class InvoiceData {
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
-	static final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/nesser";
+	static final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/ihunter";
 	
-	static final String USER = "nesser";
-	static final String PASS = "Dh97eQ";
+	static final String USER = "ihunter";
+	static final String PASS = "g8]5:B";
 
 	static public Connection getConnection()
 	{
@@ -142,14 +142,20 @@ public class InvoiceData {
 		PreparedStatement ps;
 						
 		try {
-			String addEmail = "INSERT INTO Emails (Email, PersonCode) values (?, ?);";
+			String addEmail = "INSERT INTO Emails (PersonID, PersonCode, Email) values (?, ?, ?);";
 			
-			int personID = Integer.parseInt(personCode);
+			int personID;
+			ps = conn.prepareStatement("Select * from Persons where PersonCode = ?;");
+			ps.setString(1, personCode);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			personID = rs.getInt("PersonID");
 			
 			ps = conn.prepareStatement(addEmail);
-			ps.setString(1, email);
+			ps.setInt(1, personID);
 			ps.setString(2, personCode);
-			ps.executeQuery();
+			ps.setString(3, email);
+			ps.executeUpdate();
 			ps.close();
 			
 		} 
@@ -430,7 +436,7 @@ public class InvoiceData {
 			ps.setString(2, productCode);
 			ps.setInt(3, invoiceID);
 			ps.setInt(4, quantity);
-			ps.executeQuery();
+			ps.executeUpdate();
 			ps.close();
 			
 		} 
@@ -475,7 +481,7 @@ public class InvoiceData {
 			ps.setString(2, productCode);
 			ps.setInt(3, invoiceID);
 			ps.setInt(4, quantity);
-			ps.executeQuery();
+			ps.executeUpdate();
 			ps.close();
 			
 		} 
@@ -513,14 +519,15 @@ public class InvoiceData {
 			rs.next();
 			int invoiceID = rs.getInt("InvoiceID");
 			
-			String addProduct = "INSERT INTO InvoiceProducts (ProductID, ProductCode, InvoiceID, Quantity) values (?, ?, ?, ?);";
+			String addProduct = "INSERT INTO InvoiceProducts values (?, ?, ?, ?, ?);";
 						
 			ps = conn.prepareStatement(addProduct);
 			ps.setInt(1, productID);
 			ps.setString(2, productCode);
 			ps.setInt(3, invoiceID);
 			ps.setInt(4, quantity);
-			ps.executeQuery();
+			ps.setString(5, ticketCode);
+			ps.executeUpdate();
 			ps.close();
 			
 		} 
@@ -564,7 +571,7 @@ public class InvoiceData {
 			ps.setString(2, productCode);
 			ps.setInt(3, invoiceID);
 			ps.setInt(4, quantity);
-			ps.executeQuery();
+			ps.executeUpdate();
 			ps.close();
 			
 		} 
