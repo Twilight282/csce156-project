@@ -159,6 +159,7 @@ CREATE TABLE `Customers` (
 	`CustomerCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`CustomerName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`ContactID` int(11) NOT NULL,
+    `ContactCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
     `CustomerType` int(11) NOT NULL,
 	`Street` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
 	`City` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -172,7 +173,7 @@ CREATE TABLE `Customers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
-INSERT INTO `Customers` VALUES (1,'1234','John Doe',4321,1,'7320 N. 17th', 'Lincoln', 'NE', '68521','USA'),(2,'2345','Mary Sue',8765,2,'3431 Webster St.', 'Omaha', 'NE', '68131','USA'),(3,'3456','Bill Shankly',8642,1,'872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA'),(4,'4567','Steven Gerrard',7531,1,'872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA');
+INSERT INTO `Customers` VALUES (1,'1234','John Doe',4321,'4321',1,'7320 N. 17th', 'Lincoln', 'NE', '68521','USA'),(2,'2345','Mary Sue',8765,'4321',2,'3431 Webster St.', 'Omaha', 'NE', '68131','USA'),(3,'3456','Bill Shankly',8642,'5432',1,'872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA'),(4,'4567','Steven Gerrard',7531,'6543',1,'872 Lakeshore Dr.', 'Lincoln', 'NE', '68528','USA');
 /*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `CustomerTypes`;
