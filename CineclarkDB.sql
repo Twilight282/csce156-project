@@ -43,6 +43,7 @@ DROP TABLE IF EXISTS `Refreshments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Refreshments` (
 	`ProductID` int(11) NOT NULL,
+	`ProductCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
 	`RefreshmentName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`Price` decimal(5,2) Not Null Default '0',
 	PRIMARY KEY (`ProductID`),
@@ -51,7 +52,7 @@ CREATE TABLE `Refreshments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Refreshments` DISABLE KEYS */;
-INSERT INTO `Refreshments` VALUES (1,1.20,'Large Potato'),(7,4.13,'Apple Juice'),(11,6.12,'Pumpkin Pie');
+INSERT INTO `Refreshments` VALUES (1,'asdf',1.20,'Large Potato'),(7,'sdfg',4.13,'Apple Juice'),(11,'dfgh',6.12,'Pumpkin Pie');
 /*!40000 ALTER TABLE `Refreshments` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `MovieTickets`;
@@ -59,6 +60,7 @@ DROP TABLE IF EXISTS `MovieTickets`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MovieTickets` (
 	`ProductID` int(11) NOT NULL,
+	`ProductCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
 	`MovieName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`Price` decimal(5,2) Not Null,
 	`Date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -71,7 +73,7 @@ CREATE TABLE `MovieTickets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `MovieTickets` DISABLE KEYS */;
-INSERT INTO `MovieTickets` VALUES (2,'Con Air',10.25,'2010-04-13 4:02',3,'3D'),(4,'Generic Movie',11.1,'2012-06-12 1:10',1,'ee'),(5,'That Film Guy',22.8,'2007-01-28',2,'10');
+INSERT INTO `MovieTickets` VALUES (2,'qwer','Con Air',10.25,'2010-04-13 4:02',3,'3D'),(4,'wert','Generic Movie',11.1,'2012-06-12 1:10',1,'ee'),(5,'erty','That Film Guy',22.8,'2007-01-28',2,'10');
 /*!40000 ALTER TABLE `MovieTickets` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `SeasonPasses`;
@@ -79,6 +81,7 @@ DROP TABLE IF EXISTS `SeasonPasses`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SeasonPasses` (
 	`ProductID` int(11) NOT NULL,
+	`ProductCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
 	`PassName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`Price` decimal(5,2) Not Null,
 	`StartDate` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -89,7 +92,7 @@ CREATE TABLE `SeasonPasses` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `SeasonPasses` DISABLE KEYS */;
-INSERT INTO `SeasonPasses` VALUES (0,11.2,'zzygzyygy','2014-03-02','2015-04-03'),(8,23.2,'adsfk','2013-02-24','2013-05-24'),(10,42.8,'slfk','2015-06-12','2016-10-25');
+INSERT INTO `SeasonPasses` VALUES (0,'qscv',11.2,'zzygzyygy','2014-03-02','2015-04-03'),(8,'wegs',23.2,'adsfk','2013-02-24','2013-05-24'),(10,'sdfo',42.8,'slfk','2015-06-12','2016-10-25');
 /*!40000 ALTER TABLE `SeasonPasses` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `ParkingPasses`;
@@ -97,6 +100,7 @@ DROP TABLE IF EXISTS `ParkingPasses`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ParkingPasses` (
 	`ProductID` int(11) NOT NULL,
+	`ProductCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
 	`Price` decimal(5,2) Not Null,
 	PRIMARY KEY (`ProductID`),
 	FOREIGN KEY (`ProductID`) REFERENCES Products(`ProductID`)
@@ -104,7 +108,7 @@ CREATE TABLE `ParkingPasses` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `ParkingPasses` DISABLE KEYS */;
-INSERT INTO `ParkingPasses` VALUES (3,1.11),(6,2.22),(9,3.43);
+INSERT INTO `ParkingPasses` VALUES (3,'rtyu',1.11),(6,'tyui',2.22),(9,'yuio',3.43);
 /*!40000 ALTER TABLE `ParkingPasses` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `Addresses`;
@@ -146,6 +150,7 @@ DROP TABLE IF EXISTS `Invoices`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Invoices` (
 	`InvoiceID` int(11) NOT NULL AUTO_INCREMENT,
+	`InvoiceCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
 	`CustomerID` int(11) NOT NULL,
     `PersonID` int(11) NOT NULL,
 	`Date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -156,7 +161,7 @@ CREATE TABLE `Invoices` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Invoices` DISABLE KEYS */;
-INSERT INTO `Invoices` VALUES (0,1,4321,'10/27/2016'),(1,2,4321,'10/25/2016'),(2,3,7531,'10/10/2016'),(3,4,8642,'11/1/2016');
+INSERT INTO `Invoices` VALUES (0,'fdsa',1,4321,'10/27/2016'),(1,'gfds',2,4321,'10/25/2016'),(2,'hgfd',3,7531,'10/10/2016'),(3,'jhgf',4,8642,'11/1/2016');
 /*!40000 ALTER TABLE `Invoices` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `Customers`;
@@ -164,6 +169,7 @@ DROP TABLE IF EXISTS `Customers`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Customers` (
 	`CustomerID` int(11) NOT NULL AUTO_INCREMENT,
+	`CustomerCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`CustomerName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`ContactID` int(11) NOT NULL,
     `CustomerType` int(11) NOT NULL,
@@ -176,7 +182,7 @@ CREATE TABLE `Customers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
-INSERT INTO `Customers` VALUES (1,'John Doe',4321,1,1),(2,'Mary Sue',8765,2,2),(3,'Bill Shankly',8642,1,3),(4,'Steven Gerrard',7531,1,1);
+INSERT INTO `Customers` VALUES (1,'1234','John Doe',4321,1,1),(2,'2345','Mary Sue',8765,2,2),(3,'3456','Bill Shankly',8642,1,3),(4,'4567','Steven Gerrard',7531,1,1);
 /*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `CustomerTypes`;
@@ -198,6 +204,7 @@ DROP TABLE IF EXISTS `Persons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Persons` (
 	`PersonID` int(11) NOT NULL AUTO_INCREMENT,
+	`PersonCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`PersonName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`AddressID` int(11) NOT NULL,
 	PRIMARY KEY (`PersonID`),
@@ -206,7 +213,7 @@ CREATE TABLE `Persons` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Persons` DISABLE KEYS */;
-INSERT INTO `Persons` VALUES (4321,'Lionel Messi', 1),(8765,'Coutinho',2),(8642,'Firmino',3),(7531,'Joel Matip',4);
+INSERT INTO `Persons` VALUES (4321,'4321','Lionel Messi', 1),(8765,'5432','Coutinho',2),(8642,'6543','Firmino',3),(7531,'7654','Joel Matip',4);
 /*!40000 ALTER TABLE `Persons` ENABLE KEYS */;
 
 
@@ -215,11 +222,12 @@ DROP TABLE IF EXISTS `Emails`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Emails` (
 	`PersonID` int(11) NOT NULL,
+	`PersonCode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
 	`Email` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
     FOREIGN KEY (`PersonID`) REFERENCES Persons(`PersonID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `Emails` DISABLE KEYS */;
-INSERT INTO `Emails` VALUES (4321,'blah@blah.com'),(8765,'evenmoreblah@yahoo.com'),(8642,'thisisblah@foogle.com'),(7531,'theblahest@aol.com');
+INSERT INTO `Emails` VALUES (4321,'4321','blah@blah.com'),(8765,'5432','evenmoreblah@yahoo.com'),(8642,'6543','thisisblah@foogle.com'),(7531,'7654','theblahest@aol.com');
 /*!40000 ALTER TABLE `Emails` ENABLE KEYS */;
